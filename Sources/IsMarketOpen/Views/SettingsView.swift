@@ -70,10 +70,25 @@ private struct GeneralSettingsView: View {
             Section {
                 LabeledContent("Privacy", value: "No account or telemetry")
                 LabeledContent("Application", value: "Native macOS menu-bar app")
+                LabeledContent("Version", value: appVersionLabel)
+                LabeledContent("Source") {
+                    Link("github.com/ankushjindal/IsMarketOpen",
+                         destination: URL(string: "https://github.com/ankushjindal/IsMarketOpen")!)
+                }
             }
         }
         .formStyle(.grouped)
         .padding()
+    }
+
+    private var appVersionLabel: String {
+        let info = Bundle.main.infoDictionary
+        let short = info?["CFBundleShortVersionString"] as? String ?? "—"
+        let build = info?["CFBundleVersion"] as? String
+        if let build, !build.isEmpty, build != short {
+            return "\(short) (\(build))"
+        }
+        return short
     }
 }
 
