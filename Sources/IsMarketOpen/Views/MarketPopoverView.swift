@@ -6,7 +6,10 @@ struct MarketPopoverView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.openSettings) private var openSettings
     @State private var expandedRowID: String?
+    @State private var contentHeight: CGFloat = Self.maxContentHeight
     private let timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
+
+    private static let maxContentHeight: CGFloat = 580
 
     var body: some View {
         VStack(spacing: 0) {
@@ -35,11 +38,24 @@ struct MarketPopoverView: View {
                     Divider()
                     WorldClocksView()
                 }
+                .background(
+                    GeometryReader { proxy in
+                        Color.clear.preference(key: ContentHeightKey.self, value: proxy.size.height)
+                    }
+                )
             }
             // MenuBarExtra windows do not infer a useful height for a ScrollView.
             // A max-only constraint lets the scroll area collapse to zero, leaving
-            // only the Settings/Quit footer visible in the real menu-bar popover.
-            .frame(height: 580)
+            // only the Settings/Quit footer visible in the real menu-bar popover, so
+            // the height stays explicit: measured content, clamped to the maximum.
+            .frame(height: min(contentHeight, Self.maxContentHeight))
+            .onPreferenceChange(ContentHeightKey.self) { height in
+                Task { @MainActor in
+                    guard height > 0 else { return }
+                    contentHeight = height
+                }
+            }
+            .animation(.snappy(duration: 0.18), value: min(contentHeight, Self.maxContentHeight))
 
             Divider()
             VStack(spacing: 0) {
@@ -49,9 +65,10 @@ struct MarketPopoverView: View {
                 }
                 .keyboardShortcut(",", modifiers: .command)
 
-                FooterRow(title: "Quit", systemImage: "power", shortcut: nil) {
+                FooterRow(title: "Quit", systemImage: "power", shortcut: "⌘Q") {
                     NSApplication.shared.terminate(nil)
                 }
+                .keyboardShortcut("q", modifiers: .command)
             }
             .padding(.horizontal, 8)
             .padding(.vertical, 6)
@@ -59,6 +76,14 @@ struct MarketPopoverView: View {
         .frame(width: 420)
         .background(.regularMaterial)
         .onReceive(timer) { _ in model.tick() }
+    }
+}
+
+private struct ContentHeightKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }
 
