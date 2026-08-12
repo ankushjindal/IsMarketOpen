@@ -42,30 +42,55 @@ struct MarketPopoverView: View {
             .frame(height: 580)
 
             Divider()
-            HStack {
-                Button {
+            VStack(spacing: 0) {
+                FooterRow(title: "Settings", systemImage: "gearshape", shortcut: "⌘,") {
                     openSettings()
                     SettingsPresenter.finishOpening()
-                } label: {
-                    Label("Settings", systemImage: "gearshape")
                 }
-                .buttonStyle(.plain)
                 .keyboardShortcut(",", modifiers: .command)
-                .help("Settings (⌘,)")
 
-                Spacer()
-
-                Button("Quit") {
+                FooterRow(title: "Quit", systemImage: "power", shortcut: nil) {
                     NSApplication.shared.terminate(nil)
                 }
-                .buttonStyle(.plain)
             }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
         }
         .frame(width: 420)
         .background(.regularMaterial)
         .onReceive(timer) { _ in model.tick() }
+    }
+}
+
+private struct FooterRow: View {
+    let title: String
+    let systemImage: String
+    let shortcut: String?
+    let action: () -> Void
+
+    @State private var isHovering = false
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 8) {
+                Label(title, systemImage: systemImage)
+                Spacer()
+                if let shortcut {
+                    Text(shortcut)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .padding(.horizontal, 6)
+            .padding(.vertical, 5)
+            .contentShape(.rect)
+            .background(
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(isHovering ? AnyShapeStyle(.selection) : AnyShapeStyle(.clear))
+            )
+        }
+        .buttonStyle(.plain)
+        .onHover { isHovering = $0 }
+        .accessibilityLabel(shortcut.map { "\(title) (\($0))" } ?? title)
     }
 }
 
