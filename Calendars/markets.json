@@ -1,0 +1,579 @@
+{
+  "calendars" : [
+    {
+      "exceptions" : [
+        {
+          "date" : "2026-01-01",
+          "name" : "New Year's Day",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-01-19",
+          "name" : "Martin Luther King Jr. Day",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-02-16",
+          "name" : "Washington's Birthday",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-04-03",
+          "name" : "Good Friday",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-05-25",
+          "name" : "Memorial Day",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-06-19",
+          "name" : "Juneteenth",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-07-03",
+          "name" : "Independence Day (observed)",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-09-07",
+          "name" : "Labor Day",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-11-26",
+          "name" : "Thanksgiving Day",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-12-25",
+          "name" : "Christmas Day",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-11-27",
+          "name" : "Day after Thanksgiving",
+          "note" : "Regular session closes at 1:00 PM ET",
+          "sessions" : [
+            {
+              "endMinute" : 570,
+              "kind" : "preMarket",
+              "startMinute" : 240,
+              "weekdays" : [
+
+              ]
+            },
+            {
+              "endMinute" : 780,
+              "kind" : "regular",
+              "startMinute" : 570,
+              "weekdays" : [
+
+              ]
+            },
+            {
+              "endMinute" : 1020,
+              "kind" : "postMarket",
+              "startMinute" : 780,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-12-24",
+          "name" : "Christmas Eve",
+          "note" : "Regular session closes at 1:00 PM ET",
+          "sessions" : [
+            {
+              "endMinute" : 570,
+              "kind" : "preMarket",
+              "startMinute" : 240,
+              "weekdays" : [
+
+              ]
+            },
+            {
+              "endMinute" : 780,
+              "kind" : "regular",
+              "startMinute" : 570,
+              "weekdays" : [
+
+              ]
+            },
+            {
+              "endMinute" : 1020,
+              "kind" : "postMarket",
+              "startMinute" : 780,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        }
+      ],
+      "marketIDs" : [
+        "us-stocks"
+      ],
+      "sources" : [
+        {
+          "name" : "NYSE",
+          "url" : "https://www.nyse.com/markets/hours-calendars"
+        },
+        {
+          "name" : "Nasdaq",
+          "url" : "https://www.nasdaqtrader.com/trader.aspx?id=calendar"
+        }
+      ],
+      "verifiedAt" : "2026-08-12T00:00:00Z",
+      "verifiedThrough" : "2026-12-31"
+    },
+    {
+      "exceptions" : [
+        {
+          "date" : "2026-01-15",
+          "name" : "Maharashtra municipal election",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-01-26",
+          "name" : "Republic Day",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-03-03",
+          "name" : "Holi",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-03-26",
+          "name" : "Shri Ram Navami",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-03-31",
+          "name" : "Shri Mahavir Jayanti",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-04-03",
+          "name" : "Good Friday",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-04-14",
+          "name" : "Dr. Babasaheb Ambedkar Jayanti",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-05-01",
+          "name" : "Maharashtra Day",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-05-28",
+          "name" : "Bakri Id",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-06-26",
+          "name" : "Muharram",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-09-14",
+          "name" : "Ganesh Chaturthi",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-10-02",
+          "name" : "Mahatma Gandhi Jayanti",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-10-20",
+          "name" : "Dussehra",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-11-10",
+          "name" : "Diwali Balipratipada",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-11-24",
+          "name" : "Guru Nanak Jayanti",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-12-25",
+          "name" : "Christmas",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-11-08",
+          "name" : "Diwali Laxmi Pujan",
+          "note" : "Muhurat trading is planned; session time has not yet been announced",
+          "sessions" : [
+
+          ]
+        }
+      ],
+      "marketIDs" : [
+        "india-stocks",
+        "nse-fo"
+      ],
+      "sources" : [
+        {
+          "name" : "NSE",
+          "url" : "https://www.nseindia.com/resources/exchange-communication-holidays"
+        },
+        {
+          "name" : "BSE",
+          "url" : "https://www.bseindia.com/static/markets/marketinfo/listholi"
+        }
+      ],
+      "verifiedAt" : "2026-08-12T00:00:00Z",
+      "verifiedThrough" : "2026-12-31"
+    },
+    {
+      "exceptions" : [
+        {
+          "date" : "2026-01-26",
+          "name" : "Republic Day",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-04-03",
+          "name" : "Good Friday",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-10-02",
+          "name" : "Mahatma Gandhi Jayanti",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-12-25",
+          "name" : "Christmas",
+          "sessions" : [
+
+          ]
+        },
+        {
+          "date" : "2026-03-03",
+          "name" : "Holi",
+          "note" : "Morning session closed; evening session open",
+          "sessions" : [
+            {
+              "endMinute" : 1410,
+              "kind" : "evening",
+              "startMinute" : 1020,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-03-26",
+          "name" : "Shri Ram Navami",
+          "note" : "Morning session closed; evening session open",
+          "sessions" : [
+            {
+              "endMinute" : 1410,
+              "kind" : "evening",
+              "startMinute" : 1020,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-03-31",
+          "name" : "Shri Mahavir Jayanti",
+          "note" : "Morning session closed; evening session open",
+          "sessions" : [
+            {
+              "endMinute" : 1410,
+              "kind" : "evening",
+              "startMinute" : 1020,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-04-14",
+          "name" : "Dr. Babasaheb Ambedkar Jayanti",
+          "note" : "Morning session closed; evening session open",
+          "sessions" : [
+            {
+              "endMinute" : 1410,
+              "kind" : "evening",
+              "startMinute" : 1020,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-05-01",
+          "name" : "Maharashtra Day",
+          "note" : "Morning session closed; evening session open",
+          "sessions" : [
+            {
+              "endMinute" : 1410,
+              "kind" : "evening",
+              "startMinute" : 1020,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-05-28",
+          "name" : "Bakri Id",
+          "note" : "Morning session closed; evening session open",
+          "sessions" : [
+            {
+              "endMinute" : 1410,
+              "kind" : "evening",
+              "startMinute" : 1020,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-06-26",
+          "name" : "Muharram",
+          "note" : "Morning session closed; evening session open",
+          "sessions" : [
+            {
+              "endMinute" : 1410,
+              "kind" : "evening",
+              "startMinute" : 1020,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-09-14",
+          "name" : "Ganesh Chaturthi",
+          "note" : "Morning session closed; evening session open",
+          "sessions" : [
+            {
+              "endMinute" : 1410,
+              "kind" : "evening",
+              "startMinute" : 1020,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-10-20",
+          "name" : "Dussehra",
+          "note" : "Morning session closed; evening session open",
+          "sessions" : [
+            {
+              "endMinute" : 1410,
+              "kind" : "evening",
+              "startMinute" : 1020,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-11-10",
+          "name" : "Diwali Balipratipada",
+          "note" : "Morning session closed; evening session open",
+          "sessions" : [
+            {
+              "endMinute" : 1410,
+              "kind" : "evening",
+              "startMinute" : 1020,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-11-24",
+          "name" : "Guru Nanak Jayanti",
+          "note" : "Morning session closed; evening session open",
+          "sessions" : [
+            {
+              "endMinute" : 1410,
+              "kind" : "evening",
+              "startMinute" : 1020,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-01-01",
+          "name" : "New Year's Day",
+          "note" : "Evening session closed",
+          "sessions" : [
+            {
+              "endMinute" : 1020,
+              "kind" : "regular",
+              "startMinute" : 540,
+              "weekdays" : [
+
+              ]
+            }
+          ]
+        },
+        {
+          "date" : "2026-11-08",
+          "name" : "Diwali Laxmi Pujan",
+          "note" : "Muhurat trading is planned; session time has not yet been announced",
+          "sessions" : [
+
+          ]
+        }
+      ],
+      "marketIDs" : [
+        "mcx"
+      ],
+      "sources" : [
+        {
+          "name" : "MCX",
+          "url" : "https://www.mcxindia.com/market-operations/trading-surveillance/trading-holidays"
+        }
+      ],
+      "verifiedAt" : "2026-08-12T00:00:00Z",
+      "verifiedThrough" : "2026-12-31"
+    },
+    {
+      "exceptions" : [
+
+      ],
+      "marketIDs" : [
+        "es",
+        "nq",
+        "rty",
+        "emd",
+        "ym",
+        "zb",
+        "zn",
+        "zf",
+        "zt",
+        "zc",
+        "zs",
+        "zw",
+        "cl",
+        "ng",
+        "ho",
+        "rb",
+        "gc",
+        "si",
+        "hg",
+        "pl"
+      ],
+      "sources" : [
+        {
+          "name" : "CME Group",
+          "url" : "https://www.cmegroup.com/trading-hours.html"
+        }
+      ],
+      "verifiedAt" : "2026-08-12T00:00:00Z",
+      "verifiedThrough" : "2026-08-31"
+    },
+    {
+      "exceptions" : [
+
+      ],
+      "marketIDs" : [
+        "crypto"
+      ],
+      "sources" : [
+        {
+          "name" : "Binance",
+          "url" : "https://www.binance.com/en"
+        }
+      ],
+      "verifiedAt" : "2026-08-12T00:00:00Z",
+      "verifiedThrough" : "2030-12-31"
+    }
+  ],
+  "generatedAt" : "2026-08-12T00:00:00Z",
+  "schemaVersion" : 1
+}
