@@ -69,6 +69,7 @@ final class AppSettings {
         static let hiddenRowIDs = "hiddenRowIDs"
         static let rowOrder = "rowOrder"
         static let completedFirstRun = "completedFirstRun"
+        static let worldClocksCollapsed = "worldClocksCollapsed"
     }
 
     private let defaults: UserDefaults
@@ -81,6 +82,7 @@ final class AppSettings {
     var hiddenRowIDs: Set<String> { didSet { defaults.set(Array(hiddenRowIDs), forKey: Key.hiddenRowIDs) } }
     var rowOrder: [String] { didSet { defaults.set(rowOrder, forKey: Key.rowOrder) } }
     var completedFirstRun: Bool { didSet { defaults.set(completedFirstRun, forKey: Key.completedFirstRun) } }
+    var worldClocksCollapsed: Bool { didSet { defaults.set(worldClocksCollapsed, forKey: Key.worldClocksCollapsed) } }
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
@@ -92,6 +94,7 @@ final class AppSettings {
         hiddenRowIDs = Set(defaults.stringArray(forKey: Key.hiddenRowIDs) ?? [])
         rowOrder = defaults.stringArray(forKey: Key.rowOrder) ?? MarketCatalog.rowOrder
         completedFirstRun = defaults.bool(forKey: Key.completedFirstRun)
+        worldClocksCollapsed = defaults.bool(forKey: Key.worldClocksCollapsed)
     }
 
     func moveRow(_ rowID: String, direction: Int) {
