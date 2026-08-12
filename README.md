@@ -38,8 +38,18 @@ Requirements: Xcode 16 or later and macOS 14 or later.
 open build/IsMarketOpen.app
 ```
 
-The build script produces an ad-hoc-signed local app bundle. Public releases
-must be signed with a Developer ID certificate and notarized.
+The build script produces an ad-hoc-signed local app bundle.
+
+## Releases
+
+[Tagged releases](https://github.com/ankushjindal/IsMarketOpen/releases) attach
+that same ad-hoc-signed bundle. It is **not** signed with a Developer ID
+certificate and **not** notarized, so macOS blocks it on first launch —
+right-click the app and choose **Open** once to get past Gatekeeper, or build
+from source using the steps above.
+
+Signing with a Developer ID and notarizing is the remaining work before the app
+is fit for wider distribution.
 
 ## Calendar data
 
