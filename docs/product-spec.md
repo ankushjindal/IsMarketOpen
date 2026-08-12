@@ -8,8 +8,9 @@ market-data operations, and release-window coordination.
 
 ## Principles
 
-1. Regular-session status is the headline.
-2. Extended/Globex activity remains visible in expanded details.
+1. Cash equities use regular-session status as the headline.
+2. Futures use the complete electronic session as the headline, with regular
+   session and maintenance-break context shown separately.
 3. All calculations happen locally and opening the popover never waits on I/O.
 4. Calendar exceptions override weekly schedules.
 5. Unknown or expired calendar data fails honestly.

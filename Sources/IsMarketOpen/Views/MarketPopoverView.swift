@@ -116,7 +116,7 @@ private struct FavoriteStatusView: View {
 
             HStack(spacing: 6) {
                 StatusDot(snapshot: snapshot)
-                Text(snapshot.state.label)
+                Text(MarketFormatting.headlineStateLabel(for: snapshot))
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(snapshot.state == .calendarOutdated ? .orange : .primary)
                 if let exception = snapshot.currentException {
@@ -131,7 +131,11 @@ private struct FavoriteStatusView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
 
-            if let secondary = snapshot.activeSecondarySessions.first {
+            if let regularText = MarketFormatting.regularSessionText(for: snapshot, now: model.now) {
+                Text(regularText)
+                    .font(.caption)
+                    .foregroundStyle(.blue)
+            } else if let secondary = snapshot.activeSecondarySessions.first {
                 Text("\(secondary.kind.label) is active")
                     .font(.caption)
                     .foregroundStyle(.blue)

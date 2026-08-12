@@ -2,8 +2,8 @@
 
 A fast, native, telemetry-free macOS menu-bar clock for global market sessions.
 
-Is Market Open? answers one question at a glance: is a market's regular session
-open, and when is its next open or close? It handles exchange-local time zones,
+Is Market Open? answers one question at a glance: is a market trading now, and
+when is its next open or close? It handles exchange-local time zones,
 daylight saving changes, holidays, early closes, partial sessions, and special
 sessions without showing prices, news, charts, or portfolio data.
 
@@ -15,8 +15,9 @@ sessions without showing prices, news, charts, or portfolio data.
 - Crypto: continuous 24/7 schedule
 - Reorderable city clocks
 
-The headline for equities and futures uses the product's regular or primary
-session. Expanded details separately show extended-hours or Globex activity.
+Equities use their regular cash session for the headline. Futures use the full
+published electronic session; expanded details separately identify Globex,
+regular-session activity, and daily maintenance breaks.
 
 ## Privacy and performance
 
@@ -52,8 +53,9 @@ hours may be finalized only shortly before a holiday.
 
 ## Status semantics
 
-`OPEN` means the configured regular/primary trading session is active. It does
-not guarantee that an exchange or broker is operational. Crypto's `OPEN 24/7`
+`OPEN` means the configured headline trading session is active. Futures label
+that session as `OPEN · GLOBEX` or `OPEN · REGULAR`. It does not guarantee that
+an exchange or broker is operational. Crypto's `OPEN 24/7`
 describes its normal schedule, not live venue health.
 
 ## License

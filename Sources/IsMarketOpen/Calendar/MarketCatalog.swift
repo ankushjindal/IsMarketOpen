@@ -72,7 +72,8 @@ enum MarketCatalog {
             timezone: String,
             region: MarketRegion,
             sessions: [SessionRule],
-            alwaysOpen: Bool = false
+            alwaysOpen: Bool = false,
+            usesElectronicSessionForHeadline: Bool = false
         ) -> MarketDefinition {
             MarketDefinition(
                 id: id,
@@ -83,6 +84,7 @@ enum MarketCatalog {
                 region: region,
                 sessions: sessions,
                 isAlwaysOpen: alwaysOpen,
+                usesElectronicSessionForHeadline: usesElectronicSessionForHeadline,
                 exceptions: [],
                 sources: [],
                 verifiedAt: placeholderDate,
@@ -123,7 +125,16 @@ enum MarketCatalog {
         ]
 
         func future(_ id: String, _ name: String, sessions: [SessionRule], timezone: String = "America/New_York", city: String = "New York") -> MarketDefinition {
-            market(id, name, shortName: id.uppercased(), city: city, timezone: timezone, region: .us, sessions: sessions)
+            market(
+                id,
+                name,
+                shortName: id.uppercased(),
+                city: city,
+                timezone: timezone,
+                region: .us,
+                sessions: sessions,
+                usesElectronicSessionForHeadline: sessions.contains { $0.kind == .globex }
+            )
         }
 
         return [

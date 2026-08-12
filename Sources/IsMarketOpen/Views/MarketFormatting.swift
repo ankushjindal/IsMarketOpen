@@ -26,7 +26,7 @@ enum MarketFormatting {
             return exception.name
         }
         guard let transition = snapshot.nextTransition, let kind = snapshot.transitionKind else {
-            return snapshot.activeBreak == nil ? "No upcoming regular session" : "Daily break"
+            return snapshot.activeBreak == nil ? "No upcoming session" : "Daily break"
         }
 
         let verb = kind == .opens ? "opens" : "closes"
@@ -53,6 +53,24 @@ enum MarketFormatting {
             return "\(snapshot.market.shortName) closed · \(exception.name)"
         }
         return "\(snapshot.market.shortName) \(transitionText(for: snapshot, now: now, preference: preference, compact: true).lowercased())"
+    }
+
+    static func headlineStateLabel(for snapshot: MarketSnapshot) -> String {
+        guard snapshot.state == .open, snapshot.market.usesElectronicSessionForHeadline else {
+            return snapshot.state.label
+        }
+        return snapshot.primarySession?.kind == .globex ? "OPEN · GLOBEX" : "OPEN · REGULAR"
+    }
+
+    static func regularSessionText(for snapshot: MarketSnapshot, now: Date) -> String? {
+        guard snapshot.market.usesElectronicSessionForHeadline else { return nil }
+        if snapshot.activeSecondarySessions.contains(where: { $0.kind == .regular }) {
+            return "Regular session active"
+        }
+        guard snapshot.primarySession?.kind == .globex,
+              let nextRegular = snapshot.upcomingSessions.first(where: { $0.kind == .regular })
+        else { return nil }
+        return "Regular opens in \(relativeDuration(nextRegular.start.timeIntervalSince(now)))"
     }
 
     static func relativeDuration(_ interval: TimeInterval) -> String {

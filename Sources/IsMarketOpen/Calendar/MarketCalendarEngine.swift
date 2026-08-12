@@ -35,14 +35,21 @@ struct MarketCalendarEngine: Sendable {
         }
 
         let intervals = sessionIntervals(for: market, around: now, forwardDays: 15)
-        let primary = intervals.first { $0.kind.isPrimary && $0.start <= now && now < $0.end }
+        let activeRegular = intervals.first { $0.kind.isPrimary && $0.start <= now && now < $0.end }
+        let activeElectronic = intervals.first { $0.kind == .globex && $0.start <= now && now < $0.end }
+        let primary = market.usesElectronicSessionForHeadline
+            ? (activeElectronic ?? activeRegular)
+            : activeRegular
         let secondary = intervals.filter {
-            !$0.kind.isPrimary && $0.kind != .maintenanceBreak && $0.start <= now && now < $0.end
+            $0.id != primary?.id && $0.kind != .maintenanceBreak && $0.start <= now && now < $0.end
         }
         let activeBreak = intervals.first {
             $0.kind == .maintenanceBreak && $0.start <= now && now < $0.end
         }
-        let nextPrimary = intervals.first { $0.kind.isPrimary && $0.start > now }
+        let nextPrimary = intervals.first {
+            let isHeadlineSession = $0.kind.isPrimary || (market.usesElectronicSessionForHeadline && $0.kind == .globex)
+            return isHeadlineSession && $0.start > now
+        }
         let calendarOutdated = isCoverageExpired(market: market, now: now)
 
         let transition: Date?

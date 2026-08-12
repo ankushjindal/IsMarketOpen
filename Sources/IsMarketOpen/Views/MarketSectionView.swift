@@ -171,14 +171,18 @@ private struct ProductStatusRow: View {
                     Text(snapshot.market.displayName)
                         .font(.caption)
                     Spacer()
-                    Text(snapshot.state.label)
+                    Text(MarketFormatting.headlineStateLabel(for: snapshot))
                         .font(.caption2.weight(.bold))
                         .foregroundStyle(.secondary)
                 }
                 Text(MarketFormatting.transitionText(for: snapshot, now: model.now, preference: model.settings.clockFormat))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
-                if let secondary = snapshot.activeSecondarySessions.first, snapshot.state == .closed {
+                if let regularText = MarketFormatting.regularSessionText(for: snapshot, now: model.now) {
+                    Text(regularText)
+                        .font(.caption2)
+                        .foregroundStyle(.blue)
+                } else if let secondary = snapshot.activeSecondarySessions.first, snapshot.state == .closed {
                     Text("\(secondary.kind.label) active")
                         .font(.caption2)
                         .foregroundStyle(.blue)

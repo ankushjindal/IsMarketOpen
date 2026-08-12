@@ -102,6 +102,7 @@ struct MarketDefinition: Identifiable, Hashable, Sendable {
     let region: MarketRegion
     let sessions: [SessionRule]
     let isAlwaysOpen: Bool
+    let usesElectronicSessionForHeadline: Bool
     var exceptions: [MarketException]
     var sources: [MarketSource]
     var verifiedAt: Date
