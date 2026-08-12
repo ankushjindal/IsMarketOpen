@@ -51,12 +51,36 @@ Maintainers should verify each market against its official exchange source.
 CME Group schedules require rolling updates because product-specific holiday
 hours may be finalized only shortly before a holiday.
 
+### Publishing a calendar update
+
+`BundledCalendar.swift` is the editable source and `Calendars/markets.json` is
+the generated public feed. To publish corrected holidays or extend verified
+coverage without releasing a new app:
+
+```sh
+# Edit Sources/IsMarketOpen/Calendar/BundledCalendar.swift first.
+./scripts/export-calendar.sh
+./scripts/run-tests.sh
+git add Sources/IsMarketOpen/Calendar/BundledCalendar.swift Calendars/markets.json
+git commit -m "Update market calendars"
+git push
+```
+
+Apps check the feed on launch at most once every 24 hours. Users can fetch it
+immediately with **Settings → Calendars → Refresh calendars**. CI rejects feed
+drift, duplicate or unknown markets, invalid sessions and sources, and coverage
+shorter than 21 days from the manifest generation date.
+
 ## Status semantics
 
 `OPEN` means the configured headline trading session is active. Futures label
 that session as `OPEN · GLOBEX` or `OPEN · REGULAR`. It does not guarantee that
 an exchange or broker is operational. Crypto's `OPEN 24/7`
 describes its normal schedule, not live venue health.
+
+> **Disclaimer:** Is Market Open? is informational only. Calendars can be
+> delayed, incomplete, or changed by an exchange. Verify official exchange
+> hours before making a trading decision.
 
 ## License
 

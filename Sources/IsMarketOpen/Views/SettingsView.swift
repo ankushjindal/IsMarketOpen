@@ -241,7 +241,7 @@ private struct CalendarSettingsView: View {
             }
 
             Section {
-                Text("Market status is calculated locally. Network access is used only to refresh the public calendar manifest.")
+                Text("Market status is calculated locally. Network access is used only to refresh the public calendar manifest. Information only—verify hours with the exchange before trading.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

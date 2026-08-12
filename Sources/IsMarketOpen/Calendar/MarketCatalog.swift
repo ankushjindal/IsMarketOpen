@@ -44,6 +44,10 @@ enum MarketCatalog {
         ),
     ]
 
+    static var marketIDs: Set<String> {
+        Set(baseDefinitions().map(\.id))
+    }
+
     static func definitions(applying manifest: CalendarManifest = BundledCalendar.manifest) -> [String: MarketDefinition] {
         let base = baseDefinitions()
         var indexed = Dictionary(uniqueKeysWithValues: base.map { ($0.id, $0) })

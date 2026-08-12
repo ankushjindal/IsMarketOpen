@@ -33,8 +33,10 @@ enum BundledCalendar {
                 marketIDs: futuresMarketIDs,
                 verifiedAt: verifiedAt,
                 // CME finalizes product-specific holiday schedules close to each
-                // holiday. The remote manifest extends this rolling horizon.
-                verifiedThrough: "2026-08-31",
+                // holiday. Stop before Labor Day instead of inventing hours;
+                // the public manifest can move this rolling horizon without
+                // requiring a new application release.
+                verifiedThrough: "2026-09-06",
                 sources: [source("CME Group", "https://www.cmegroup.com/trading-hours.html")],
                 exceptions: []
             ),

@@ -13,5 +13,9 @@ jobs:
         run: swift --version
       - name: Run tests
         run: swift test
+      - name: Verify generated calendar feed
+        run: |
+          ./scripts/export-calendar.sh "$RUNNER_TEMP/markets.json"
+          diff -u Calendars/markets.json "$RUNNER_TEMP/markets.json"
       - name: Build app bundle
         run: ./scripts/build-app.sh

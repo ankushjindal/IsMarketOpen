@@ -4,11 +4,13 @@ actor CalendarUpdateService {
     enum UpdateError: LocalizedError {
         case invalidResponse
         case unsupportedSchema(Int)
+        case invalidManifest(String)
 
         var errorDescription: String? {
             switch self {
             case .invalidResponse: "The calendar server returned an invalid response."
             case let .unsupportedSchema(version): "Calendar schema version \(version) is not supported."
+            case let .invalidManifest(message): "The calendar manifest is invalid: \(message)"
             }
         }
     }
@@ -72,6 +74,11 @@ actor CalendarUpdateService {
     private func decode(_ data: Data) throws -> CalendarManifest {
         let manifest = try decoder.decode(CalendarManifest.self, from: data)
         guard manifest.schemaVersion == 1 else { throw UpdateError.unsupportedSchema(manifest.schemaVersion) }
+        do {
+            try CalendarManifestValidator.validate(manifest, knownMarketIDs: MarketCatalog.marketIDs)
+        } catch {
+            throw UpdateError.invalidManifest(error.localizedDescription)
+        }
         return manifest
     }
 

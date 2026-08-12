@@ -1,12 +1,12 @@
 import Foundation
 
-struct CalendarManifest: Codable, Sendable {
+struct CalendarManifest: Codable, Equatable, Sendable {
     let schemaVersion: Int
     let generatedAt: Date
     let calendars: [MarketCalendarOverlay]
 }
 
-struct MarketCalendarOverlay: Codable, Sendable {
+struct MarketCalendarOverlay: Codable, Equatable, Sendable {
     let marketIDs: [String]
     let verifiedAt: Date
     let verifiedThrough: String
