@@ -5,7 +5,7 @@ struct MenuBarStatusLabel: View {
 
     var body: some View {
         let snapshot = model.favoriteSnapshot
-        let iconState = iconState(for: snapshot)
+        let iconState = MarketIconState(snapshot: snapshot)
 
         if model.settings.menuDisplayMode == .iconOnly {
             Image(systemName: iconState.systemImage)
@@ -22,13 +22,6 @@ struct MenuBarStatusLabel: View {
             }
             .accessibilityLabel(accessibilityLabel(snapshot))
         }
-    }
-
-    private func iconState(for snapshot: MarketSnapshot) -> MarketIconState {
-        if snapshot.state == .calendarOutdated || snapshot.calendarIsStale { return .warning }
-        if snapshot.isTransitionSoon { return .soon }
-        if snapshot.state == .open || snapshot.state == .alwaysOpen { return .open }
-        return .closed
     }
 
     private func accessibilityLabel(_ snapshot: MarketSnapshot) -> String {

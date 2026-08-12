@@ -193,6 +193,19 @@ struct MarketSnapshot: Identifiable, Sendable {
     let calendarIsStale: Bool
 
     var id: String { market.id }
+
+    /// Inside a scheduled pause with no other session running.
+    var isPaused: Bool {
+        activeBreak != nil && primarySession == nil && activeSecondarySessions.isEmpty
+    }
+
+    /// Today runs on exception sessions rather than the normal rules — an early
+    /// close, or a partial holiday with only some sessions trading. A full
+    /// closure is excluded: there is nothing shortened about a day that is shut.
+    var hasModifiedSessionsToday: Bool {
+        guard let exception = currentException else { return false }
+        return !exception.isFullClosure
+    }
 }
 
 struct UpcomingException: Identifiable, Sendable {
@@ -205,18 +218,64 @@ struct UpcomingException: Identifiable, Sendable {
     var id: String { "\(dateKey)-\(title)-\(marketNames.joined())" }
 }
 
+/// Menu-bar icon states. Deliberately monochrome: menu-bar images are rendered as
+/// templates, so shape has to carry the meaning on tinted bars and under
+/// Reduce Transparency. Filled glyphs mean the market is trading right now.
 enum MarketIconState: Sendable {
     case open
+    case openExtended
+    case earlyClose
+    case closingSoon
+    case openingSoon
+    case atBreak
     case closed
-    case soon
     case warning
 
     var systemImage: String {
         switch self {
         case .open: "building.columns.fill"
+        case .openExtended: "sun.horizon.fill"
+        case .earlyClose: "clock.badge.exclamationmark.fill"
+        case .closingSoon: "arrow.down.circle.fill"
+        case .openingSoon: "arrow.up.circle"
+        case .atBreak: "pause.circle"
         case .closed: "building.columns"
-        case .soon: "clock.badge"
         case .warning: "exclamationmark.triangle.fill"
         }
+    }
+
+    /// Whether the glyph is filled, i.e. some session is currently trading.
+    var isTrading: Bool {
+        switch self {
+        case .open, .openExtended, .earlyClose, .closingSoon: true
+        case .openingSoon, .atBreak, .closed, .warning: false
+        }
+    }
+
+    init(snapshot: MarketSnapshot) {
+        if snapshot.state == .calendarOutdated || snapshot.calendarIsStale {
+            self = .warning
+            return
+        }
+
+        // A scheduled pause outranks the countdown: "paused, back at 18:00" says
+        // more than "opens soon", and the two always coincide near the reopen.
+        if snapshot.isPaused {
+            self = .atBreak
+            return
+        }
+
+        if snapshot.isTransitionSoon, let kind = snapshot.transitionKind {
+            self = kind == .closes ? .closingSoon : .openingSoon
+            return
+        }
+
+        if snapshot.state == .open || snapshot.state == .alwaysOpen {
+            self = snapshot.hasModifiedSessionsToday ? .earlyClose : .open
+            return
+        }
+
+        // Headline session is shut, but pre-market/after-hours/Globex is trading.
+        self = snapshot.activeSecondarySessions.isEmpty ? .closed : .openExtended
     }
 }
