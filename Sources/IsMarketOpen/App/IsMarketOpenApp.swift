@@ -14,6 +14,14 @@ struct IsMarketOpenApp: App {
                 .environment(model)
         }
         .menuBarExtraStyle(.window)
+        .commands {
+            CommandGroup(replacing: .appSettings) {
+                Button("Settings…") {
+                    SettingsPresenter.openClosingMenuBar()
+                }
+                .keyboardShortcut(",", modifiers: .command)
+            }
+        }
 
         Settings {
             SettingsView()

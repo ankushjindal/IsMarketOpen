@@ -42,10 +42,14 @@ struct MarketPopoverView: View {
 
             Divider()
             HStack {
-                SettingsLink {
+                Button {
+                    SettingsPresenter.openClosingMenuBar()
+                } label: {
                     Label("Settings", systemImage: "gearshape")
                 }
                 .buttonStyle(.plain)
+                .keyboardShortcut(",", modifiers: .command)
+                .help("Settings (⌘,)")
 
                 Spacer()
 
