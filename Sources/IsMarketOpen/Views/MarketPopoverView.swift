@@ -4,6 +4,7 @@ import SwiftUI
 
 struct MarketPopoverView: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.openSettings) private var openSettings
     @State private var expandedRowID: String?
     private let timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
 
@@ -43,7 +44,8 @@ struct MarketPopoverView: View {
             Divider()
             HStack {
                 Button {
-                    SettingsPresenter.openClosingMenuBar()
+                    openSettings()
+                    SettingsPresenter.finishOpening()
                 } label: {
                     Label("Settings", systemImage: "gearshape")
                 }

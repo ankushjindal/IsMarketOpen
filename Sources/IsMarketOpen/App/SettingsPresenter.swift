@@ -1,32 +1,32 @@
 import AppKit
 
 enum SettingsPresenter {
-    /// Opens the Settings window and dismisses the menu-bar panel if it is open.
+    /// Brings the Settings window forward and dismisses the menu-bar panel.
+    /// Callers open Settings through the `openSettings` environment action first;
+    /// the private `showSettingsWindow:` selector no longer exists on macOS 14+.
     @MainActor
-    static func openClosingMenuBar() {
-        let popoverWindows = NSApp.windows.filter(isMenuBarPopoverWindow)
-
-        NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+    static func finishOpening() {
+        let panels = NSApp.windows.filter(isMenuBarPanel)
         NSApp.activate(ignoringOtherApps: true)
 
-        for window in popoverWindows {
-            window.orderOut(nil)
+        // Order out on the next main-queue turn so the Settings window is up first.
+        Task { @MainActor in
+            for panel in panels {
+                panel.orderOut(nil)
+            }
         }
     }
 
     @MainActor
-    private static func isMenuBarPopoverWindow(_ window: NSWindow) -> Bool {
+    private static func isMenuBarPanel(_ window: NSWindow) -> Bool {
         guard window.isVisible else { return false }
 
         let className = NSStringFromClass(type(of: window))
         if className.contains("NSStatusBarWindow") { return false }
+        if className.contains("MenuBarExtra") { return true }
 
-        // Window-style MenuBarExtra content is a fixed 420pt panel while open.
-        if abs(window.frame.width - 420) < 2 {
-            return true
-        }
-
-        // Fallback: key, untitled utility panel that is currently frontmost.
-        return window.isKeyWindow && window.title.isEmpty && window.styleMask.contains(.nonactivatingPanel)
+        return window is NSPanel
+            && window.styleMask.contains(.nonactivatingPanel)
+            && window.title.isEmpty
     }
 }
